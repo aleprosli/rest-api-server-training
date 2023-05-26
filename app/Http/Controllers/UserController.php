@@ -3,30 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\ResponseAPI;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
+    use ResponseAPI;
+    
     public function listAllUsers()
     {
-        $users = User::all();
-
-        return response()->json([
-            'message' => 'Semua list pengguna',
-            'data' => UserResource::collection($users),
-            'code' => 200
-        ]);
+        return $this->success(UserResource::collection(User::all()));
     }
 
     public function showUser(Request $request)
     {
         $user = User::find($request->id);
-
-        return response()->json([
-            'message' => 'Nama pengguna adalah '.$user->name,
-            'data' => $user,
-            'code' => 200
-        ]);
+        
+        return $this->success($user, 'Nama pengguna adalah '.$user->name);
     }
 }
