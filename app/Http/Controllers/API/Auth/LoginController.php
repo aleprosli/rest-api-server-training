@@ -16,9 +16,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+
+            $user = auth()->user();
+            $token = $user->createToken('token')->accessToken;
+            $user->token = $token;
+
             return response()->json([
                 'message' => 'Berjaya Login',
-                'data' => auth()->user(),
+                'data' => $user,
                 'code' => 200
             ]);
         }
