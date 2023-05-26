@@ -22,7 +22,7 @@ class LoginController extends Controller
             $user->token = $token;
 
             return response()->json([
-                'message' => 'Berjaya Login',
+                'message' => __('auth.success_login'),
                 'data' => $user,
                 'code' => 200
             ]);
