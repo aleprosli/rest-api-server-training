@@ -22,6 +22,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user/index', [UserController::class, 'listAllUsers']);
+    Route::get('/user/show', [UserController::class, 'showUser']);
+
 });
 
 
