@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'Semua list pengguna',
-            'data' => $users,
+            'data' => UserResource::collection($users),
             'code' => 200
         ]);
     }
